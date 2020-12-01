@@ -20,16 +20,29 @@
 
 <body>
     <!--HEADER-->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top mb-5" id="mainNav">
+            <div class="container-fluid">
+                <a class="navbar-brand js-scroll-trigger text-white font-weight-bold" href="#page-top" id="title-header">Ventes aux enchères</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger text-white effect-underline font-weight-bold" href="index.php">Liste des enchères</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger text-white font-weight-bold" href="./src/pages/enchereManager.php" id="encherenav">Enchère manager</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
     <?php
-header( "Last-Modified: " . gmdate( "D, j M Y H:i:s" ) . " GMT" );
-header( "Expires: " . gmdate( "D, j M Y H:i:s", time() ) . " GMT" );
-header( "Cache-Control: no-store, no-cache, must-revalidate" );
-header( "Cache-Control: post-check=0, pre-check=0", FALSE );
-header( "Pragma: no-cache" );
-?>
-    <?php
-        define('__ROOT__', __DIR__);
-        require_once(__ROOT__.'/src/include/header.php');  
+        define('__ROOT__', __DIR__);  
         require_once(__ROOT__.'/src/include/listeEncheressaved.php');
     ?>  
 

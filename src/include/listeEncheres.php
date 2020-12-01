@@ -47,6 +47,7 @@ var_dump($_GET['id']);
         <?php 
             $listing_enchere = json_decode(file_get_contents(__ROOT__.'/src/data/data.json'), true);            
         ?>
+        <?php if($listing_enchere):?>
         <?php foreach($listing_enchere as $key => $items) :?>
         <?php if($items['active_enchere'] == "Actif"):?>
         <div class="card  shadow m-lg-4" style="width: 18rem;">
@@ -83,5 +84,7 @@ var_dump($_GET['id']);
 
         <?php endif; ?>
         <?php endforeach; ?>
+        <?php endif; ?>
+        <p>Aucun article disponible</p>
     </div>
 </div>

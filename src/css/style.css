@@ -11,7 +11,9 @@ html, body{
 h2{
     font-size: 36px;
 }
-
+.button, input{
+    overflow: hidden !important;
+}
 .labelForm{
     width: 250px !important;
     text-align: center;

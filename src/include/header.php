@@ -8,7 +8,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto my-2 my-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger text-white effect-underline font-weight-bold" id="listeenchere" href="index.php">Liste des enchères</a>
+                        <a class="nav-link js-scroll-trigger text-white effect-underline font-weight-bold" href="<?php echo __ROOT__. "index.php"?>">Liste des enchères</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger text-white font-weight-bold" href="./src/pages/enchereManager.php" id="encherenav">Enchère manager</a>

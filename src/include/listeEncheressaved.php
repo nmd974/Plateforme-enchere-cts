@@ -13,6 +13,7 @@
     <h2 class="text-center mb-5 font-weight-bold">ARTICLES</h2>
     <div class=" d-flex justify-content-center flex-wrap">
         <?php $listing_enchere = json_decode(file_get_contents(__ROOT__.'/src/data/data.json'), true); //On recupere les donnees dans le fichier data.json?>
+        <?php if($listing_enchere):?>
         <?php foreach($listing_enchere as $key => $items): //Pour chaque encheres dans data.json on va faire diffrentes traitements?> 
             <?php //Ici on ajoute ce qu'il y a dans data.json en object
                 $listing_enchere = new Enchere (
@@ -67,5 +68,7 @@
                 </script>
             <?php endif; ?>
         <?php endforeach; ?>
+        <?php endif; ?>
+        <p>Aucun article disponible</p>
     </div>
 </div>
