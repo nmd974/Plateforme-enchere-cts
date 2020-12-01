@@ -20,13 +20,19 @@
 
 <body>
     <!--HEADER-->
-    
+    <?php
+header( "Last-Modified: " . gmdate( "D, j M Y H:i:s" ) . " GMT" );
+header( "Expires: " . gmdate( "D, j M Y H:i:s", time() ) . " GMT" );
+header( "Cache-Control: no-store, no-cache, must-revalidate" );
+header( "Cache-Control: post-check=0, pre-check=0", FALSE );
+header( "Pragma: no-cache" );
+?>
     <?php
         define('__ROOT__', __DIR__);
         require_once(__ROOT__.'/src/include/header.php');  
         require_once(__ROOT__.'/src/include/listeEncheressaved.php');
     ?>  
-    <?php var_dump(__ROOT__);?>
+
 
     <!-- jQuery and JS bundle w/ Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
