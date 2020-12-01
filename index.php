@@ -22,9 +22,9 @@
     <!--HEADER-->
     
     <?php
-        define('__ROOT__', dirname(__FILE__));
+        define('__ROOT__', __DIR__);
         require_once(__ROOT__.'/src/include/header.php');  
-        require_once(__ROOT__.'/src/include/listeEncheres.php');
+        require_once(__ROOT__.'/src/include/listeEncheressaved.php');
     ?>  
     <?php var_dump(__ROOT__);?>
 
