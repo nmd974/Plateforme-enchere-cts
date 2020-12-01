@@ -7,7 +7,7 @@
     function validationAjout($data, $image_upload):string
     {
     //Faire le contrôle des images
-        if($image_upload['name'] !== ""){
+        if($image_upload['image_upload']['name'] !== ""){
             $validationImage = controleImage($image_upload);
         }
         if($validationImage){//Si le contrôle du type, taille est ok alors on poursuit

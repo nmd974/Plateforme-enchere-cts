@@ -19,11 +19,12 @@ class AjoutEnchere {
         $this->id = md5(uniqid(rand(), true));
         $this->intitule = htmlentities($intitule);
         $this->prix_depart = htmlentities($prix_depart);
+        $this->prix_clic = htmlentities($prix_clic);
         $this->duree_enchere = htmlentities($duree_enchere);
         $this->image_nom = htmlentities($image_nom);
         $this->augmentation_prix = htmlentities($augmentation_prix);
         $this->augmentation_duree = htmlentities($augmentation_duree);
-        $this->date_fin = mktime(date("H")+ (int)$this->duree_enchere['duree'], date("i"), date("s"), date("m"), date("d"), date("Y"));
+        $this->date_fin = mktime(date("H")+ (int)$this->duree_enchere, date("i"), date("s"), date("m"), date("d"), date("Y"));
         $this->saveToArray();
     }
 

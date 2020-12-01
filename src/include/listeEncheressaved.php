@@ -69,6 +69,8 @@
             <?php endif; ?>
         <?php endforeach; ?>
         <?php endif; ?>
+        <?php if(!$listing_enchere):?>
         <p>Aucun article disponible</p>
+        <?php endif ?>
     </div>
 </div>
