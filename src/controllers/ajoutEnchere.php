@@ -1,6 +1,6 @@
 <?php  
-    require_once(__ROOT__.'/class/AjoutEnchere.php');
-    require_once(__ROOT__.'/controllers/imageControl.php');
+    require_once(__ROOT__.'/src/class/AjoutEnchere.php');
+    require_once(__ROOT__.'/src/controllers/imageControl.php');
 ?>
 
 <?php 

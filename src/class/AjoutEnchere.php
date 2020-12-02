@@ -18,27 +18,29 @@ class AjoutEnchere {
     {
         $this->id = md5(uniqid(rand(), true));
         $this->intitule = htmlentities($intitule);
-        $this->prix_depart = htmlentities($prix_depart);
-        $this->prix_clic = htmlentities($prix_clic);
-        $this->duree_enchere = htmlentities($duree_enchere);
+        $this->prix_depart = (int)htmlentities($prix_depart);
+        $this->prix_clic = (float)htmlentities($prix_clic);
+        $this->duree_enchere = (int)htmlentities($duree_enchere);
         $this->image_nom = htmlentities($image_nom);
-        $this->augmentation_prix = htmlentities($augmentation_prix);
-        $this->augmentation_duree = htmlentities($augmentation_duree);
-        $this->date_fin = mktime(date("H")+ (int)$this->duree_enchere, date("i"), date("s"), date("m"), date("d"), date("Y"));
+        $this->augmentation_prix = (float)htmlentities($augmentation_prix);
+        $this->augmentation_duree = (float)htmlentities($augmentation_duree);
+        date_default_timezone_set("Indian/Reunion");//On definie la timezone à la reunion
+        $this->date_fin = mktime(date("H")+ (int)$this->duree_enchere, date("i"), date("s"), date("m"), date("d"), date("Y"));//On ajoute une valeur de base meme si de base l'enchere ne sera pas activée
         $this->saveToArray();
     }
 
     public function saveToArray()
     {
 
-        $enregistrementData = json_decode(file_get_contents(__ROOT__.'/data/data.json'), true); //On recupere le contenu de data.json
+        $enregistrementData = json_decode(file_get_contents(__ROOT__.'/src/data/data.json'), true); //On recupere le contenu de data.json
+        //Si le tableau est vide alors on créé un tableau que l'on va ajouté la 1ere enchere sinon on ajoute à la suite la nouvelle enchere
         if($enregistrementData){
             array_push($enregistrementData, $this);//On ajoute le nouvel id
-            file_put_contents(__ROOT__.'/data/data.json', json_encode($enregistrementData),FILE_APPEND);
+            file_put_contents(__ROOT__.'/src/data/data.json', json_encode($enregistrementData));
         }else{
             $enregistrementData = [];
             array_push($enregistrementData, $this);//On ajoute le nouvel id
-            file_put_contents(__ROOT__.'/data/data.json', json_encode($enregistrementData, FILE_APPEND));
+            file_put_contents(__ROOT__.'/src/data/data.json', json_encode($enregistrementData));
         }
 
     }

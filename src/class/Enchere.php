@@ -13,7 +13,7 @@ class Enchere {
     public $active_enchere;
     public $etat_enchere;
 
-    public function __construct(string $id, string $intitule, float $prix_depart, int $duree_enchere, string $image_nom, float $prix_clic, float $augmentation_prix, int $augmentation_duree, int $date_fin, string $active_enchere, string $etat_enchere)
+    public function __construct(string $id, string $intitule, float $prix_depart, int $duree_enchere, ?string $image_nom, float $prix_clic, float $augmentation_prix, int $augmentation_duree, int $date_fin, string $active_enchere, string $etat_enchere)
     {
         $this->id = $id;
         $this->intitule = $intitule;
