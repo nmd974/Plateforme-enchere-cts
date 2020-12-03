@@ -10,17 +10,19 @@
         if($image_upload['image_upload']['name'] !== ""){
             $validationImage = controleImage($image_upload);
         }
-        if($validationImage){//Si le contrôle du type, taille est ok alors on poursuit
+        if(!$validationImage[0]){//Si le contrôle du type, taille est ok alors on poursuit
             $obj = new AjoutEnchere (
                 $data['intitule'],
                 $data['prix_depart'],
                 $data['duree_enchere'],
-                $validationImage,
+                $validationImage[1],//Correspond au nom de l'image lors de la validation de la fonction imagecontrol
                 $data['prix_clic'],
                 $data['augmentation_prix'],
                 $data['augmentation_duree']
             );
             return '<div class="alert alert-success"> Le produit a bien été ajouté !</div>';
+        }else{
+            return $validationImage[1];
         }
     }
 

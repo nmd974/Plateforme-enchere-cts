@@ -62,18 +62,18 @@
                     ?>  
                     <tr>
                         <td class="text-center align-middle"><img src="<?php echo "../../img/". $listing_enchere->image_nom?>" alt="image enchere" class="img-thumbail" style="width:120px; height:120px; border: none;"></td>
-                        <td class="text-center align-middle"><?= $listing_enchere->intitule ?></td>
-                        <td class="text-center align-middle"><?= $listing_enchere->duree_enchere ?></td>
-                        <td class="text-center align-middle"><?= $listing_enchere->prix_depart ?></td>
-                        <td class="text-center align-middle"><?= $listing_enchere->prix_clic ?></td>
-                        <td class="text-center align-middle"><?= $listing_enchere->augmentation_duree ?></td>
-                        <td class="text-center align-middle"><?= $listing_enchere->augmentation_prix ?></td>
-                        <td class="text-center align-middle"><?= $listing_enchere->active_enchere ?></td>
+                        <td class="text-center align-middle"><?= htmlentities($listing_enchere->intitule,ENT_QUOTES) ?></td>
+                        <td class="text-center align-middle"><?= htmlentities($listing_enchere->duree_enchere,ENT_QUOTES) ?></td>
+                        <td class="text-center align-middle"><?= htmlentities($listing_enchere->prix_depart,ENT_QUOTES) ?></td>
+                        <td class="text-center align-middle"><?= htmlentities($listing_enchere->prix_clic,ENT_QUOTES) ?></td>
+                        <td class="text-center align-middle"><?= htmlentities($listing_enchere->augmentation_duree,ENT_QUOTES) ?></td>
+                        <td class="text-center align-middle"><?= htmlentities($listing_enchere->augmentation_prix,ENT_QUOTES) ?></td>
+                        <td class="text-center align-middle"><?= htmlentities($listing_enchere->active_enchere,ENT_QUOTES) ?></td>
                         <td class="text-center align-middle">
                         <!--LEs boutons d'actions-->
                             <a 
                                 href="../pages/enchereManager.php?action=activer&id=<?= $listing_enchere->id ?>" 
-                                class="btn btn-secondary 
+                                class="btn btn-secondary btn-manager
                                 <?php if($listing_enchere->active_enchere == "Actif"){ //Ici on desactive les boutons si l'enchere est active ou non si actif alors on en peut pas modifier et activer à nouveau
                                         echo 'disabled';
                                     }else{
@@ -86,7 +86,7 @@
                             </a>
                             <a 
                                 href="../pages/enchereManager.php?action=desactiver&id=<?= $listing_enchere->id ?>" 
-                                class="btn btn-secondary 
+                                class="btn btn-secondary btn-manager
                                 <?php if($listing_enchere->active_enchere == "Actif"){ //Ici on desactive les boutons si l'enchere est active ou non si actif alors on en peut pas modifier et activer à nouveau
                                         echo 'active';
                                     }else{
@@ -96,10 +96,21 @@
                                 role="button" 
                                 aria-pressed="true"
                             >Desactiver
-                            </a>                            
+                            </a>     
+                            <?php 
+                            //Ici on defini les valeur a envoyer par l'url et on encode pour eviter le bug des espaces
+                                $url =  "id=".htmlentities($listing_enchere->id, ENT_QUOTES).
+                                        "&intitule=".urlencode(htmlentities($listing_enchere->intitule, ENT_QUOTES)).
+                                        "&prix_depart=".htmlentities($listing_enchere->prix_depart, ENT_QUOTES).
+                                        "&duree_enchere=".htmlentities($listing_enchere->duree_enchere, ENT_QUOTES).
+                                        "&image_nom=".htmlentities($listing_enchere->image_nom, ENT_QUOTES).
+                                        "&prix_clic=".htmlentities($listing_enchere->prix_clic, ENT_QUOTES).
+                                        "&augmentation_prix=".htmlentities($listing_enchere->augmentation_prix, ENT_QUOTES).
+                                        "&augmentation_duree=".htmlentities($listing_enchere->augmentation_duree, ENT_QUOTES);
+                            ?>                       
                             <a 
-                                href="../pages/modifierEnchere.php?id=<?= htmlentities($listing_enchere->id) ?>&intitule=<?= htmlentities($listing_enchere->intitule) ?>&prix_depart=<?= htmlentities($listing_enchere->prix_depart) ?>&duree_enchere=<?= htmlentities($listing_enchere->duree_enchere) ?>&image_nom=<?= htmlentities($listing_enchere->image_nom) ?>&prix_clic=<?= htmlentities($listing_enchere->prix_clic) ?>&augmentation_prix=<?= htmlentities($listing_enchere->augmentation_prix) ?>&augmentation_duree=<?= htmlentities($listing_enchere->augmentation_duree) ?>" 
-                                class="btn btn-secondary 
+                                href="../pages/modifierEnchere.php?<?php echo $url;?>" 
+                                class="btn btn-secondary btn-manager
                                 <?php if($listing_enchere->active_enchere == "Actif"){ //Ici on desactive les boutons si l'enchere est active ou non si actif alors on en peut pas modifier et activer à nouveau
                                         echo 'disabled';
                                     }else{

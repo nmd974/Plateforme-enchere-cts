@@ -39,16 +39,21 @@ html, body{
 
 .btn-manager:hover {
     background-color: #81C784;
+    cursor: pointer !important; 
 }
-
-.btn-manager.active {
-    background-color: #ecf0f1 !important;
+.btn-manager.disabled {
+    background-color: #ecf0f1!important;
     border-color: #81C784 !important;
-    cursor: default !important;
+    cursor: pointer !important;
+}
+.btn-manager.active {
+    background-color: #FF9800!important;
+    border-color: #FF9800 !important;
+    cursor: pointer !important;
 }
 
 .active {
-    cursor: default !important;
+    cursor: pointer !important;
 }
 
 /******** MEDIA QUERIES ********/

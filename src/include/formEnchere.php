@@ -16,9 +16,7 @@
                 global $enchere;
                     if($enchere){
                         echo $enchere;
-                        
-                        header('Location: ../pages/home.php');
-                        sleep(5);
+
                     }
             ?>
             <div class="d-flex justify-content-center align-items-center mb-3 items bg-light">
