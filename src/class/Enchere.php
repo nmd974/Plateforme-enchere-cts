@@ -28,5 +28,82 @@ class Enchere {
         $this->etat_enchere = $etat_enchere;
     }
 
+    public function toHTML():string
+    {
+        $id = $this->id;
+        $intitule = htmlentities($this->intitule, ENT_QUOTES);
+        $image_nom = $this->image_nom;
+        $prix_depart = htmlentities(round($this->prix_depart,2), ENT_QUOTES);
+        $prix_clic = htmlentities($this->prix_clic, ENT_QUOTES);
+        $augmentation_prix = htmlentities($this->augmentation_prix, ENT_QUOTES);
+
+        //Ici on determine si l'image existe ou non et en fonction on affiche le code html correspondant
+        if($image_nom !== ""){
+            return <<<HTML
+            <div class="card  shadow m-lg-4" style="width: 18rem;">
+                    <div class="duree d-flex position-absolute w-50 justify-content-center align-items-center font-weight-bold" id={$id}></div>
+                    <img src="../../img/{$image_nom}" class="card-img-top img-fluid" style="height:230px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">{$intitule}</h5>
+                        <h4 class="display-6 font-weight-bold">{$prix_depart} €</h4>
+                        <p class="card-text m-0">Prix du clic : {$prix_clic} cts</p>
+                        <p class="card-text mb-4">Prix de l'enchère : {$augmentation_prix} cts/clic</p>
+                        <div class="text-center">
+                            <form method="POST" action=#{$id}>
+                                <input name="indice" value={$id} style="display:none;">
+                                <button class="btn btn-primary btn-listEnchere p-0" name="submit">Enchérir</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+HTML;
+        }else{
+            return <<<HTML
+            <div class="card  shadow m-lg-4" style="width: 18rem;">
+                    <div class="duree d-flex position-absolute w-50 justify-content-center align-items-center font-weight-bold" id={$id}></div>
+                    <div class="d-flex justify-content-center align-items-center" style="height:230px;">
+                            <i class="fa fa-file-image-o fa-5x" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">{$intitule}</h5>
+                        <h4 class="display-6 font-weight-bold">{$prix_depart} €</h4>
+                        <p class="card-text m-0">Prix du clic : {$prix_clic} cts</p>
+                        <p class="card-text mb-4">Prix de l'enchère : {$augmentation_prix} cts/clic</p>
+                        <div class="text-center">
+                            <form method="POST" action=#{$id}>
+                                <input name="indice" value={$id} style="display:none;">
+                                <button class="btn btn-primary btn-listEnchere p-0" name="submit">Enchérir</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+HTML;
+        }
+    }
+
+    public function timerSCRIPT():string
+    {
+        $date_fin = $this->date_fin;
+        $id = $this->id;
+        return <<<HTML
+            <script>
+                    var timer = setInterval(function countDown() {
+                        var tempAct = new Date();
+                        var heure = Math.floor(tempAct.getTime() / 1000);
+                        var timeRemaining = {$date_fin} - heure;
+                        var hoursRemaining = parseInt(timeRemaining / 3600); // conversion en heures
+                        var minutesRemaining = parseInt((timeRemaining % 3600) / 60); // conversion en minutes
+                        var secondsRemaining = parseInt((timeRemaining % 3600) % 60); // conversion en secondes
+                        document.getElementById(`{$id}`).innerHTML = hoursRemaining + ' h : ' + minutesRemaining + ' m : ' + secondsRemaining + ' s ';
+                        if (timeRemaining <= 0) {
+                            document.getElementById(`{$id}`).innerHTML = "EXPIRE";
+                        }
+                    }, 1000); // répéte la fonction toutes les 1 seconde
+            </script>
+HTML;
+    }
+
 }
 ?>
