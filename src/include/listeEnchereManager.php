@@ -1,16 +1,21 @@
 <?php 
     require_once(__ROOT__.'/src/controllers/etatEnchere.php');
+    require_once(__ROOT__.'/src/class/Enchere.php');
     //Si on clique sur desactiver alors on lance la fonction desactiver qui va traiter l'action
-    if(isset($_POST['desactiver'])){
-        $desactivationEnchere = desactiverEnchere($_POST['id']);//On recupere dans une variable afin d'afficher le message retourné par la fonction
-    };
+    if(isset($_GET['action'])){
+        if($_GET['action'] == "desactiver" && $_GET['id'] !== ""){
+            $desactivationEnchere = desactiverEnchere($_GET['id']);//On recupere dans une variable afin d'afficher le message retourné par la fonction
+        };
+    }
     //Si on clique sur activer alors on lance la fonction activer qui va traiter l'action
-    if(isset($_POST['activer'])){
-        $activationEnchere = activerEnchere($_POST['id']);//On recupere dans une variable afin d'afficher le message retourné par la fonction
-    };
+    if(isset($_GET['action'])){
+        if($_GET['action'] == "activer" && $_GET['id'] !== ""){
+            $activationEnchere = activerEnchere($_GET['id']);//On recupere dans une variable afin d'afficher le message retourné par la fonction
+        };
+    };  
 ?>
 <div class="container-fluid mt-5">
-    <h2 class="text-center mb-5 font-weight-bold">Liste des enchères</h2>
+    <h2 class="text-center align-middle mb-5 font-weight-bold">Liste des enchères</h2>
     <?php 
         global $desactivationEnchere;
         global $activationEnchere;
@@ -25,15 +30,15 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col" class="text-center">Image</th>
-                <th scope="col" class="text-center">Intitule</th>
-                <th scope="col" class="text-center">Durée de l'enchère</th>
-                <th scope="col" class="text-center">Prix de base</th>
-                <th scope="col" class="text-center">Prix du clic</th>
-                <th scope="col" class="text-center">Augmentation durée</th>
-                <th scope="col" class="text-center">Augmentation du prix</th>
-                <th scope="col" class="text-center">Etat</th>
-                <th scope="col" class="text-center">Actions</th>
+                <th scope="col" class="text-center align-middle">Image</th>
+                <th scope="col" class="text-center align-middle">Intitule</th>
+                <th scope="col" class="text-center align-middle">Durée de l'enchère</th>
+                <th scope="col" class="text-center align-middle">Prix de base</th>
+                <th scope="col" class="text-center align-middle">Prix du clic</th>
+                <th scope="col" class="text-center align-middle">Augmentation durée</th>
+                <th scope="col" class="text-center align-middle">Augmentation du prix</th>
+                <th scope="col" class="text-center align-middle">Etat</th>
+                <th scope="col" class="text-center align-middle">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -56,45 +61,56 @@
                         );
                     ?>  
                     <tr>
-                        <td class="text-center"><img src="<?php echo "../../img/". $listing_enchere->image_nom?>" alt="image enchere" class="img-thumbail" style="width:60px; height:60px; border: none;"></td>
-                        <td class="text-center"><?= $listing_enchere->intitule ?></td>
-                        <td class="text-center"><?= $listing_enchere->duree_enchere ?></td>
-                        <td class="text-center"><?= $listing_enchere->prix_depart ?></td>
-                        <td class="text-center"><?= $listing_enchere->prix_clic ?></td>
-                        <td class="text-center"><?= $listing_enchere->augmentation_duree ?></td>
-                        <td class="text-center"><?= $listing_enchere->augmentation_prix ?></td>
-                        <td class="text-center"><?= $listing_enchere->active_enchere ?></td>
-                        <td class="text-center">
-                            <form method="post" action="enchereManager.php">
-                                <input name="id" value="<?= $listing_enchere->id ?>" hidden>
-                                <button type="submit" name="activer" class="btn btn-secondary" 
-                                    <?php if($listing_enchere->active_enchere == "Actif"){ //Ici on desactive les boutons si l'enchere est active ou non si actif alors on en peut pas modifier et activer à nouveau
+                        <td class="text-center align-middle"><img src="<?php echo "../../img/". $listing_enchere->image_nom?>" alt="image enchere" class="img-thumbail" style="width:120px; height:120px; border: none;"></td>
+                        <td class="text-center align-middle"><?= $listing_enchere->intitule ?></td>
+                        <td class="text-center align-middle"><?= $listing_enchere->duree_enchere ?></td>
+                        <td class="text-center align-middle"><?= $listing_enchere->prix_depart ?></td>
+                        <td class="text-center align-middle"><?= $listing_enchere->prix_clic ?></td>
+                        <td class="text-center align-middle"><?= $listing_enchere->augmentation_duree ?></td>
+                        <td class="text-center align-middle"><?= $listing_enchere->augmentation_prix ?></td>
+                        <td class="text-center align-middle"><?= $listing_enchere->active_enchere ?></td>
+                        <td class="text-center align-middle">
+                        <!--LEs boutons d'actions-->
+                            <a 
+                                href="../pages/enchereManager.php?action=activer&id=<?= $listing_enchere->id ?>" 
+                                class="btn btn-secondary 
+                                <?php if($listing_enchere->active_enchere == "Actif"){ //Ici on desactive les boutons si l'enchere est active ou non si actif alors on en peut pas modifier et activer à nouveau
                                         echo 'disabled';
                                     }else{
                                         echo 'active';
                                     }
-                                    ?>
-                                >Activer
-                                </button>
-                                <button type="submit" name="desactiver" class="btn btn-secondary" 
-                                    <?php if($listing_enchere->active_enchere == "Actif"){ //Ici on desactive les boutons si l'enchere est active ou non si actif alors on en peut pas modifier et activer à nouveau
+                                ?>"  
+                                role="button" 
+                                aria-pressed="true"
+                            >Activer
+                            </a>
+                            <a 
+                                href="../pages/enchereManager.php?action=desactiver&id=<?= $listing_enchere->id ?>" 
+                                class="btn btn-secondary 
+                                <?php if($listing_enchere->active_enchere == "Actif"){ //Ici on desactive les boutons si l'enchere est active ou non si actif alors on en peut pas modifier et activer à nouveau
                                         echo 'active';
                                     }else{
                                         echo 'disabled';
                                     }
-                                    ?>
-                                >Desactiver
-                                </button>
-                                <button type="submit" name="modifier" class="btn btn-secondary" 
-                                    <?php if($listing_enchere->active_enchere == "Actif"){ //Ici on desactive les boutons si l'enchere est active ou non si actif alors on en peut pas modifier et activer à nouveau
+                                ?>"  
+                                role="button" 
+                                aria-pressed="true"
+                            >Desactiver
+                            </a>                            
+                            <a 
+                                href="../pages/modifierEnchere.php?id=<?= htmlentities($listing_enchere->id) ?>&intitule=<?= htmlentities($listing_enchere->intitule) ?>&prix_depart=<?= htmlentities($listing_enchere->prix_depart) ?>&duree_enchere=<?= htmlentities($listing_enchere->duree_enchere) ?>&image_nom=<?= htmlentities($listing_enchere->image_nom) ?>&prix_clic=<?= htmlentities($listing_enchere->prix_clic) ?>&augmentation_prix=<?= htmlentities($listing_enchere->augmentation_prix) ?>&augmentation_duree=<?= htmlentities($listing_enchere->augmentation_duree) ?>" 
+                                class="btn btn-secondary 
+                                <?php if($listing_enchere->active_enchere == "Actif"){ //Ici on desactive les boutons si l'enchere est active ou non si actif alors on en peut pas modifier et activer à nouveau
                                         echo 'disabled';
                                     }else{
                                         echo 'active';
                                     }
-                                    ?>
-                                >Modifier
-                                </button>
-                            </form>
+                                ?>"  
+                                role="button" 
+                                aria-pressed="true"
+                            >Modifier
+                            </a>
+                           
                         </td>
                     </tr>
 
@@ -104,6 +120,6 @@
     </table>
     </div>
     <?php if(!$listing_enchere):?>
-        <p> Vous n'avez pas d'enchères enregistrées</p>
+        <p class="text-center align-middle mb-5 font-weight-bold"> Vous n'avez pas d'enchères enregistrées</p>
     <?php endif?>
 </div>

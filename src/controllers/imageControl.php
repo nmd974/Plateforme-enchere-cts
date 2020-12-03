@@ -26,7 +26,7 @@
             //Arrive ici cela veut dire que nos vérifications on été validées alors on peut procéder à l'envoie de l'image dans son bon dossier
             $tmpName = $image_upload['image_upload']['tmp_name']; //On recupère le nom temporaire ajouté par le serveur pour la gestion de l'image
             $idName = md5(uniqid(rand(), true)); //On attribue un id unique à l'image via la fonction md5 uniqid et random
-            $fileDir = dirname(__ROOT__)."/img/" . $idName . "." . $fileExt; //On spécifie la direction d'enregistrement de l'image
+            $fileDir = __ROOT__."/img/" . $idName . "." . $fileExt; //On spécifie la direction d'enregistrement de l'image
             $image_upload['image_upload'] = $idName . "." . $fileExt; //On attribue dans la superglobale $_POST le nom de l'image qui ira dans le tableau
             $resultat = move_uploaded_file($tmpName, $fileDir);
             if($resultat){

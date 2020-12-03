@@ -7,6 +7,7 @@
     if(isset($_POST['indice'])){
         encherir($_POST['indice']);
     }
+    $allInactif = true;
 ?>
 
 <div id="articles" class="container-fluid mt-5">
@@ -30,7 +31,11 @@
                     $items['etat_enchere']
                 );
             ?>   
-
+            <?php 
+                if($listing_enchere->active_enchere == "Actif"){
+                    $allInactif = false;
+                }
+            ?>
             <?php if($listing_enchere->active_enchere == "Actif"): //Ici on affiche uniquement les elements actifs?>
                 <div class="card  shadow m-lg-4" style="width: 18rem;">
                     <div class="duree d-flex position-absolute w-50 justify-content-center align-items-center font-weight-bold"
@@ -69,8 +74,8 @@
             <?php endif; ?>
         <?php endforeach; ?>
         <?php endif; ?>
-        <?php if(!$listing_enchere):?>
-        <p>Aucun article disponible</p>
+        <?php if(!$listing_enchere || $allInactif):?>
+            <p>Aucun article disponible</p>
         <?php endif ?>
     </div>
 </div>

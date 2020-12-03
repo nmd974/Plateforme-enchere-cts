@@ -1,0 +1,14 @@
+{
+    "name": "enchereapp/jordan",
+    "description": "Plateforme d'enchere aux centimes en proof of concept",
+    "type": "php",
+    "require": {
+        "php": "^7.4"
+    },
+    "authors": [
+        {
+            "name": "nmd974",
+            "email": "jha.payet@gmail.com"
+        }
+    ]
+}

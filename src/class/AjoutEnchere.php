@@ -11,7 +11,7 @@ class AjoutEnchere {
     public $augmentation_prix;
     public $augmentation_duree;
     public $date_fin;
-    public $active_enchere = 'Actif';
+    public $active_enchere = 'Inactif';
     public $etat_enchere = 'Disponible';
 
     public function __construct(string $intitule, int $prix_depart, int $duree_enchere, string $image_nom, float $prix_clic, float $augmentation_prix, int $augmentation_duree)

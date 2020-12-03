@@ -37,11 +37,18 @@
             aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto my-2 my-lg-0">
+
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger text-white effect-underline font-weight-bold" href="../pages/home.php">Liste des enchères</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger text-white font-weight-bold" href="../pages/enchereManager.php">Enchère manager</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link js-scroll-trigger text-white effect-underline font-weight-bold dropdown-toggle" href="../pages/enchereManager.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Enchère Manager
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="../pages/enchereManager.php">Liste des enchères</a>
+                            <a class="dropdown-item" href="../pages/ajouterEnchere.php">Ajouter un produit</a>
+                        </div>
                     </li>
                 </ul>
             </div>

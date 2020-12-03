@@ -4,7 +4,7 @@
 ?>
 
 <body>
-<?php require_once(__ROOT__.'/src/include/listeEnchereManager.php');?> 
+<?php require_once(__ROOT__.'/src/include/formEnchere.php');?> 
 <?php require_once(__ROOT__.'/src/include/footerscript.php');?>
 </body>
 </html>

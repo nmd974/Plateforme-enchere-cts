@@ -5,20 +5,22 @@
         $enchere = validationAjout($_POST, $_FILES);
     }
 ?>
-
         <div class="d-flex justify-content-center">
             <h2 class="mb-5 text-uppercase font-weight-bold">Ajout d'une enchère</h2>
         </div>
-
-        <?php 
-        global $enchere;
-            if($enchere){
-                echo $enchere;
-            }
-        ?>
-
         <form class="container-fluid w-100 d-flex justify-content-center align-items-center flex-column" method="POST"
-            enctype="multipart/form-data" action="enchereManager.php">
+            enctype="multipart/form-data" action="ajouterEnchere.php">
+
+            <?php 
+            //Message d'erreur ou de confirmation selon la fonction
+                global $enchere;
+                    if($enchere){
+                        echo $enchere;
+                        
+                        header('Location: ../pages/home.php');
+                        sleep(5);
+                    }
+            ?>
             <div class="d-flex justify-content-center align-items-center mb-3 items bg-light">
                 <label class="labelForm" for="#intitule">Description :</label>
                 <input type="text" class="form-control" id="intitule" maxlength="24" placeholder="24 caractères maximum"
