@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/styleListeEnchere.css">
     <link rel="stylesheet" href="../css/navbar.css">
+    <script src="https://use.fontawesome.com/c18e5332f2.js"></script>
 
     <title>
         <?php if($title){
