@@ -15,7 +15,7 @@
     <div class=" d-flex justify-content-center flex-wrap">
         <?php $listing_enchere = json_decode(file_get_contents(__ROOT__.'/src/data/data.json'), true); //On recupere les donnees dans le fichier data.json?>
         <?php if($listing_enchere):?>
-        <?php foreach($listing_enchere as $key => $items): //Pour chaque encheres dans data.json on va faire diffrentes traitements?> 
+        <?php foreach(array_reverse($listing_enchere) as $key => $items): //Pour chaque encheres dans data.json on va faire diffrentes traitements?> 
             <?php //Ici on ajoute ce qu'il y a dans data.json en object
                 $listing_enchere = new Enchere (
                     $items['id'],
