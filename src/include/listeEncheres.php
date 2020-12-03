@@ -40,8 +40,13 @@
                 <div class="card  shadow m-lg-4" style="width: 18rem;">
                     <div class="duree d-flex position-absolute w-50 justify-content-center align-items-center font-weight-bold"
                         id="<?= htmlentities($listing_enchere->id)?>"></div>
-                    <img src="<?php echo "../../img/" . htmlentities($listing_enchere->image_nom,ENT_QUOTES); ?>"
-                        class="card-img-top img-fluid" style="height:230px;" alt="...">
+                        <?php if(htmlentities($listing_enchere->image_nom,ENT_QUOTES) !== null):?>
+                            <img src="<?php echo "../../img/" . htmlentities($listing_enchere->image_nom,ENT_QUOTES); ?>"
+                                class="card-img-top img-fluid" style="height:230px;" alt="...">
+                        <?php endif ?>
+                        <?php if(htmlentities($listing_enchere->image_nom,ENT_QUOTES) == null):?>
+                            <i class="fa fa-file-image-o fa-5x" style="height:230px;" aria-hidden="true"></i>
+                        <?php endif ?>
                     <div class="card-body">
                         <h5 class="card-title font-weight-bold"><?= htmlentities($listing_enchere->intitule,ENT_QUOTES) ?></h5>
                         <h4 class="display-6 font-weight-bold"><?= round($listing_enchere->prix_depart, 2) ?> €</h4>

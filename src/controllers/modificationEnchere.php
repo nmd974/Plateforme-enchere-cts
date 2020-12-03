@@ -7,9 +7,11 @@
     {
         if($image['image_upload']['size'] !== 0)//S'il y a un nom d'image c'est que l'utilisateur souhaite changer l'image et a ajouté une nouvelle image
         {
-            //On supprime l'ancienne image attribuée
-            $oldFilename = __ROOT__."/img/" . $nomOldImage;
-            unlink($oldFilename);
+            //On supprime l'ancienne image attribuée si ce n'est pas egal à null
+            if($nomOldImage !== null){
+                $oldFilename = __ROOT__."/img/" . $nomOldImage;
+                unlink($oldFilename);
+            }
             //On lance cette fonction pour pouvoir gérer l'image ajoutée
             $image_upload = controleImage($image);
 

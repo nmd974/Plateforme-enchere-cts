@@ -28,15 +28,26 @@
                     <input type="text" class="form-control" id="intitule" maxlength="24" placeholder="24 caractères maximum"
                         name="intitule" value="<?= urldecode(htmlentities($_GET['intitule'], ENT_QUOTES))?>" required>
                 </div>
-                <input name="oldimage" value="<?= htmlentities($_GET['image_nom'], ENT_QUOTES)?>" hidden>
-                <img src="<?php echo "../../img/" . htmlentities($_GET['image_nom'], ENT_QUOTES)?>" width="200px" height="200px" class="mb-3"
-                            alt="image enchere">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <label class="fileUpload d-flex justify-content-center align-items-center bg-light">
-                                Modifier l'image
-                                <input type="file" name="image_upload" style="display:none;" id="image_upload">
-                            </label>
-                        </div>
+                <?php if(htmlentities($_GET['image_nom'] !== null)):?>
+                    <input name="oldimage" value="<?= htmlentities($_GET['image_nom'], ENT_QUOTES)?>" hidden>
+                    <img src="<?php echo "../../img/" . htmlentities($_GET['image_nom'], ENT_QUOTES)?>" width="200px" height="200px" class="mb-3"
+                                alt="image enchere">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <label class="fileUpload d-flex justify-content-center align-items-center bg-light">
+                                    Modifier l'image
+                                    <input type="file" name="image_upload" style="display:none;" id="image_upload">
+                                </label>
+                            </div>
+                <?php endif?>
+                <?php if(htmlentities($_GET['image_nom'] == null)):?>
+                    <input name="oldimage" value="<?= htmlentities($_GET['image_nom'], ENT_QUOTES)?>" hidden>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <label class="fileUpload d-flex justify-content-center align-items-center bg-light">
+                                    Ajouter une image
+                                    <input type="file" name="image_upload" style="display:none;" id="image_upload">
+                                </label>
+                            </div>
+                <?php endif?>
                 <h3 class="mb-5 mt-4 d-flex justify-content-center text-center text-uppercase">Paramètres de l'enchère</h3>
                 <div class="d-flex justify-content-center align-items-center mb-3 items bg-light">
                     <label class="labelForm" for="#prix_depart">Prix de lancement (€):</label>

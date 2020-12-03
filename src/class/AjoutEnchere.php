@@ -14,7 +14,7 @@ class AjoutEnchere {
     public $active_enchere = 'Inactif';
     public $etat_enchere = 'Disponible';
 
-    public function __construct(string $intitule, int $prix_depart, int $duree_enchere, string $image_nom, float $prix_clic, float $augmentation_prix, int $augmentation_duree)
+    public function __construct(string $intitule, int $prix_depart, int $duree_enchere, ?string $image_nom, float $prix_clic, float $augmentation_prix, int $augmentation_duree)
     {
         $this->id = md5(uniqid(rand(), true));
         $this->intitule = htmlentities($intitule, ENT_QUOTES);
