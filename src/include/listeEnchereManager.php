@@ -61,7 +61,16 @@
                         );
                     ?>  
                     <tr>
-                        <td class="text-center align-middle"><img src="<?php echo "../../img/". $listing_enchere->image_nom?>" alt="image enchere" class="img-thumbail" style="width:120px; height:120px; border: none;"></td>
+                        <td class="text-center align-middle">
+                        <?php if($listing_enchere->image_nom !== ""):?>
+                            <img src="<?php echo "../../img/". $listing_enchere->image_nom?>" alt="image enchere" class="img-thumbail" style="width:120px; height:120px; border: none;">
+                        <?php endif ?>
+                        <?php if($listing_enchere->image_nom == ""):?>
+                            <div class="d-flex justify-content-center align-items-center" style="height:120px;width:120px">
+                                <i class="fa fa-file-image-o fa-4x" aria-hidden="true"></i>
+                            </div>
+                        <?php endif ?>
+                        </td>
                         <td class="text-center align-middle"><?= htmlentities($listing_enchere->intitule,ENT_QUOTES) ?></td>
                         <td class="text-center align-middle"><?= htmlentities($listing_enchere->duree_enchere,ENT_QUOTES) ?></td>
                         <td class="text-center align-middle"><?= htmlentities($listing_enchere->prix_depart,ENT_QUOTES) ?></td>

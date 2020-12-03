@@ -8,7 +8,7 @@
         if($image['image_upload']['size'] !== 0)//S'il y a un nom d'image c'est que l'utilisateur souhaite changer l'image et a ajouté une nouvelle image
         {
             //On supprime l'ancienne image attribuée si ce n'est pas egal à null
-            if($nomOldImage !== null){
+            if($nomOldImage !== ""){
                 $oldFilename = __ROOT__."/img/" . $nomOldImage;
                 unlink($oldFilename);
             }

@@ -28,7 +28,7 @@
                     <input type="text" class="form-control" id="intitule" maxlength="24" placeholder="24 caractères maximum"
                         name="intitule" value="<?= urldecode(htmlentities($_GET['intitule'], ENT_QUOTES))?>" required>
                 </div>
-                <?php if(htmlentities($_GET['image_nom'] !== null)):?>
+                <?php if(htmlentities($_GET['image_nom'] !== "")):?>
                     <input name="oldimage" value="<?= htmlentities($_GET['image_nom'], ENT_QUOTES)?>" hidden>
                     <img src="<?php echo "../../img/" . htmlentities($_GET['image_nom'], ENT_QUOTES)?>" width="200px" height="200px" class="mb-3"
                                 alt="image enchere">
@@ -39,7 +39,7 @@
                                 </label>
                             </div>
                 <?php endif?>
-                <?php if(htmlentities($_GET['image_nom'] == null)):?>
+                <?php if(htmlentities($_GET['image_nom'] == "")):?>
                     <input name="oldimage" value="<?= htmlentities($_GET['image_nom'], ENT_QUOTES)?>" hidden>
                             <div class="d-flex justify-content-center align-items-center">
                                 <label class="fileUpload d-flex justify-content-center align-items-center bg-light">
