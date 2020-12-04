@@ -1,5 +1,7 @@
 <?php 
     require_once(__ROOT__.'/src/controllers/etatEnchere.php');
+    require_once(__ROOT__.'/src/controllers/recupererData.php');
+    require_once(__ROOT__.'/src/class/Pagination.php');
     require_once(__ROOT__.'/src/class/Enchere.php');
     //Si on clique sur desactiver alors on lance la fonction desactiver qui va traiter l'action
     if(isset($_GET['action'])){
@@ -14,6 +16,10 @@
         };
     };  
 ?>
+
+<!--Mettre un bouton activer/desactiver toutes les cartes inactives + dire les consequences-->
+<!--Mettre en archive les enchere terminees-->
+
 <div class="container-fluid mt-5">
     <h2 class="text-center align-middle mb-5 font-weight-bold">Liste des enchères</h2>
     <?php 
@@ -42,7 +48,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php $listing_enchere = json_decode(file_get_contents(__ROOT__.'/src/data/data.json'), true); //On recupere les donnees dans le fichier data.json?>
+        <?php $listing_enchere = recupererData();?>
             <?php if($listing_enchere):?>
                 <?php foreach(array_reverse($listing_enchere) as $key => $items): //Pour chaque encheres dans data.json on va faire diffrentes traitements?> 
                     <?php //Ici on ajoute ce qu'il y a dans data.json en object

@@ -60,9 +60,7 @@
                             $items['date_fin'],
                             $items['active_enchere'],
                             $items['etat_enchere']
-                        );
-                        var_dump($key);
-                        
+                        );                        
                     ?>   
                     
                     <!--On verifie ici dès qu'il y a une carte active alors le allInactif passe à false-->
