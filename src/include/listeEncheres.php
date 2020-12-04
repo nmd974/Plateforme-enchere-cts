@@ -1,5 +1,6 @@
 <?php  
     require_once(__ROOT__.'/src/class/Enchere.php');
+    require_once(__ROOT__.'/src/class/Pagination.php');
     require_once(__ROOT__.'/src/controllers/encherirEnchere.php');
     require_once(__ROOT__.'/src/controllers/recupererData.php');
     require_once(__ROOT__.'/src/controllers/pagination.php');
@@ -12,15 +13,7 @@
     $allInactif = true; //Variable utilisée pour déterminer si toutes les cartes sont inactives
 ?>
 
-<?php
-//Gestion de la pagination
-//On récupère d'abord la page où l'on est
-    if(isset($_GET['page'])){
-        $page_actuelle = $_GET['page'];
-    }
-    $maxPerPage = 8;
 
-?>
 
 <div id="articles" class="container-fluid mt-5">
     <h2 class="text-center mb-5 font-weight-bold">ARTICLES</h2>
@@ -32,14 +25,29 @@
         <?php if($listing_enchere !== null):?>
 
         <!--On récupère le nombre d'enchères pour déterminer la pagination-->
-        <?php $nb_page = pagination($listing_enchere);?>
+        <?php $nb_page = pagination($listing_enchere);$compteur =0;?>
+
+        <?php
+            //Gestion de la pagination
+            //On récupère d'abord la page où l'on est
+                if(isset($_GET['page'])){
+                    $page_actuelle = $_GET['page'];
+                }
+                $pagination = new Pagination(
+                    $listing_enchere,
+                    3,
+                    $_GET['page']
+                );
+                var_dump($pagination->intervalleMax());
+                var_dump($pagination->intervalleMin());
+        ?>
 
             <!--Pour chaque encheres dans data.json on va faire diffrentes traitements-->
             <?php foreach(array_reverse($listing_enchere) as $key => $items):?> 
 
-                <!--Ici on gèere là où on doit prendre les données selon la page actuelle-->
-                <?php if($key + 1 <= $page_actuelle*$maxPerPage && $key + 1 >= ($page_actuelle-1)*$maxPerPage):?>
-
+                <!--Ici on gère là où on doit prendre les données selon la page actuelle-->
+                <?php if($key + 1 > $pagination->intervalleMin() && $key + 1 <= $pagination->intervalleMax()):?>
+                    
                     <!--Ici on ajoute ce qu'il y a dans data.json en object-->
                     <?php 
                         $listing_enchere = new Enchere (
@@ -55,6 +63,8 @@
                             $items['active_enchere'],
                             $items['etat_enchere']
                         );
+                        var_dump($key);
+                        
                     ?>   
                     
                     <!--On verifie ici dès qu'il y a une carte active alors le allInactif passe à false-->
@@ -62,6 +72,7 @@
                     
                     <!--Ici on affiche uniquement les elements actifs-->
                     <?php if($listing_enchere->active_enchere == "Actif"):?>
+                        <?php $pagination->nombreAfficheActuel();//Permet de compter le nombre d'éléments affichés?>
                         <?= $listing_enchere->toHTML();?>
                         <?= $listing_enchere->timerSCRIPT();?>
                     <?php endif; ?>
@@ -80,47 +91,11 @@
     
     <!--Ici on affiche la pagination s'il y a des articles-->
     <?php if($listing_enchere || !$allInactif):?>
-        <div class=" d-flex justify-content-center flex-wrap">
-            <nav aria-label="...">
-                <ul class="pagination">
-                <?php for($i=0;$i<$nb_page+1;$i++):?>
-                    <?php if($i == 0):?>
-                        <li class="page-item
-                            <?php 
-                                if($page_actuelle-1 == 0){
-                                    echo 'disabled';
-                                }
-                            ?>
-                        ">
-                            <a class="page-link" href="../pages/home.php?page=<?= $page_actuelle - 1 ?>" tabindex="-1" aria-disabled="true">Previous</a>
-                        </li>
-                    <?php endif;?>
-                    <?php if($i > 0 && $i !== $nb_page + 1):?>
-                        <li class="page-item
-                            <?php 
-                                if($page_actuelle == $i){
-                                    echo 'active';
-                                }
-                            ?>
-                        ">
-                            <a class="page-link" href="../pages/home.php?page=<?= $i ?>"><?= $i ?></a>
-                        </li>
-                    <?php endif;?>
-                    <?php if($i == $nb_page):?>
-                        <li class="page-item
-                            <?php 
-                                if($page_actuelle + 1 > $nb_page){
-                                    echo 'disabled';
-                                }
-                            ?>
-                        ">
-                            <a class="page-link" href="../pages/home.php?page=<?= $page_actuelle + 1?>">Next</a>
-                        </li>
-                    <?php endif;?>
-                <?php endfor; ?>
-                </ul>
-            </nav>
-        </div>
+        <?= $pagination->toHTMLPrevious();?>
+        <?php for($i = 1; $i < $pagination->nombrePages + 1; $i++):?>
+            <?= $pagination->toHTMLPages($i);?>
+        <?php endfor?>
+        <?= $pagination->toHTMLNext();?>
     <?php endif;?>
 </div>
         
