@@ -38,8 +38,6 @@
                     3,
                     $_GET['page']
                 );
-                var_dump($pagination->intervalleMax());
-                var_dump($pagination->intervalleMin());
         ?>
 
             <!--Pour chaque encheres dans data.json on va faire diffrentes traitements-->
