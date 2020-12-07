@@ -39,10 +39,23 @@ class Enchere {
         $date_actuelle = mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"));
         $expire = $this->date_fin - $date_actuelle;
 
-        if($expire <= 0 || $_SESSION['adminLogged']){
-            $disabled = "disabled";
-        }
+        if($expire <= 0 || $_SESSION['adminLogged'] || !$_SESSION['userLogged']){
+            return <<<HTML
+            <div class="card  shadow m-lg-4" style="width: 18rem;">
+                    <div class="duree d-flex position-absolute w-50 justify-content-center align-items-center font-weight-bold" id={$id}></div>
+                    <img src="../../img/{$image_nom}" class="card-img-top img-fluid" style="height:230px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">{$intitule}</h5>
+                        <h4 class="display-6 font-weight-bold">{$prix_depart} €</h4>
+                        <p class="card-text m-0">Prix du clic : {$prix_clic} cts</p>
+                        <p class="card-text mb-4">Prix de l'enchère : {$augmentation_prix} cts/clic</p>
 
+                    </div>
+                </div>
+
+HTML;
+        }
+//Mettre une redirection si personne est connecte 
         //Ici on determine si l'image existe ou non et en fonction on affiche le code html correspondant
         if($image_nom !== ""){
             return <<<HTML
@@ -56,7 +69,7 @@ class Enchere {
                         <p class="card-text mb-4">Prix de l'enchère : {$augmentation_prix} cts/clic</p>
                         <div class="text-center">
                             <form method="POST" action=#{$id}>
-                                <input name="indice" value={$id} {$expire} style="display:none;">
+                                <input name="indice" value={$id} style="display:none;">
                                 <button class="btn btn-primary btn-listEnchere p-0" name="submit">Enchérir</button>
                             </form>
                         </div>
@@ -78,7 +91,7 @@ HTML;
                         <p class="card-text mb-4">Prix de l'enchère : {$augmentation_prix} cts/clic</p>
                         <div class="text-center">
                             <form method="POST" action="">
-                                <input name="indice" value={$id} {$expire} style="display:none;">
+                                <input name="indice" value={$id} style="display:none;">
                                 <button class="btn btn-primary btn-listEnchere p-0" name="submit">Enchérir</button>
                             </form>
                         </div>
