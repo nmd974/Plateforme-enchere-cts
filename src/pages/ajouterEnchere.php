@@ -4,7 +4,7 @@
 ?>
 <?php
     if(!$_SESSION['adminLogged']){
-        header('Location: ./home.php');
+        header('Location: ./home.php?page=1');
     }
 ?>
 <body>
