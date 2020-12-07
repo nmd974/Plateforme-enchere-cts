@@ -8,7 +8,7 @@
 <?php 
     //Ici on gere l'action d'encherir
     if(isset($_POST['indice'])){
-        encherir($_POST['indice']);
+        $encherir = encherir($_POST['indice']);
     }
     $allInactif = true; //Variable utilisée pour déterminer si toutes les cartes sont inactives
 ?>
@@ -17,7 +17,15 @@
 
 <div id="articles" class="container-fluid mt-5">
     <h2 class="text-center mb-5 font-weight-bold">ARTICLES</h2>
+    <?php
+        global $encherir;
+            if($encherir){
+                echo $encherir;
+            }
+        ?>
     <div class=" d-flex justify-content-center flex-wrap">
+
+
         <!--On recupere les donnees dans le fichier data.json-->
         <?php $listing_enchere = recupererData();?>
         

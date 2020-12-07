@@ -1,5 +1,5 @@
 <?php
-        session_start();
+
 class Enchere {
     
     public $intitule;
@@ -77,7 +77,7 @@ HTML;
                         <p class="card-text m-0">Prix du clic : {$prix_clic} cts</p>
                         <p class="card-text mb-4">Prix de l'enchère : {$augmentation_prix} cts/clic</p>
                         <div class="text-center">
-                            <form method="POST" action=#{$id}>
+                            <form method="POST" action="">
                                 <input name="indice" value={$id} {$expire} style="display:none;">
                                 <button class="btn btn-primary btn-listEnchere p-0" name="submit">Enchérir</button>
                             </form>

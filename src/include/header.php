@@ -84,7 +84,14 @@
                     <div class="d-flex flex-column justify-content-center align-items-center">
                         <div class="d-flex">
                             <span class="text-dark effect-underline font-weight-bold">Votre solde :</pspan>
-                            <span class="text-dark effect-underline font-weight-bold text-center ml-2"><?= $_SESSION['solde'] ?> €</span>
+                            <?php $data_user = recupererUser();?>
+                            <?php if($data_user):?>
+                                <?php foreach($data_user as $key => $user):?>
+                                    <?php if($_SESSION['id'] == $user['id']):?>
+                                        <span class="text-dark effect-underline font-weight-bold text-center ml-2"><?= $user['solde'] ?> €</span>
+                                    <?php endif?>
+                                <?php endforeach?>
+                            <?php endif?>
                         </div>
                         <div>
                             <a href="../controllers/logout.php" class="text-white effect-underline font-weight-bold">
