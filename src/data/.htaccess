@@ -1,0 +1,8 @@
+<Files data.json>
+    Order deny,allow
+    Deny from all
+</Files>
+<Files users.json>
+    Order deny,allow
+    Deny from all
+</Files>

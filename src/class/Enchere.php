@@ -1,5 +1,5 @@
 <?php
-
+        session_start();
 class Enchere {
     
     public $intitule;
@@ -38,10 +38,9 @@ class Enchere {
         $augmentation_prix = htmlentities($this->augmentation_prix, ENT_QUOTES);
         $date_actuelle = mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"));
         $expire = $this->date_fin - $date_actuelle;
-        if($expire <= 0){
-            $expire = "disabled";
-        }else{
-            $expire = "active";
+
+        if($expire <= 0 || $_SESSION['adminLogged']){
+            $disabled = "disabled";
         }
 
         //Ici on determine si l'image existe ou non et en fonction on affiche le code html correspondant

@@ -1,4 +1,5 @@
 <?php 
+session_start();
 function encherir($id)
     {
         $enregistrementData = json_decode(file_get_contents(__ROOT__.'/src/data/data.json'), true); //On recupere le contenu de data.json

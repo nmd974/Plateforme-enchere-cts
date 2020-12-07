@@ -14,7 +14,7 @@
 
 ?>
         <div class="d-flex justify-content-center align-items-center mb-5">
-            <h2 class="text-uppercase font-weight-bold">Ajouter un compte</h2>
+            <h2 class="text-uppercase font-weight-bold">Se connecter</h2>
             <div class="custom-control custom-switch ml-5">
                 <input type="checkbox" class="custom-control-input active" id="customSwitch1">
                 <label class="custom-control-label" for="customSwitch1">Compte existant</label>
