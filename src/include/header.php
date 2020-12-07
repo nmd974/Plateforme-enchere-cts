@@ -12,9 +12,6 @@
     if(!isset($_SESSION['userLogged'])){
         $_SESSION['userLogged'] = false;
     }
-    var_dump($_SESSION);
-
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
