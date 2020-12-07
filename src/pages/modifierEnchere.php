@@ -2,7 +2,11 @@
     $title = "Enchère manager";
     require_once(dirname(__DIR__)."/include/header.php");
 ?>
-
+<?php
+    if(!$_SESSION['adminLogged']){
+        header('Location: ./home.php');
+    }
+?>
 <body>
     <?php //On recupere l'id du produit à modifier
         if(isset($_GET['id'])){
