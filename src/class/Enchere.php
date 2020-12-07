@@ -36,6 +36,13 @@ class Enchere {
         $prix_depart = htmlentities(round($this->prix_depart,2), ENT_QUOTES);
         $prix_clic = htmlentities($this->prix_clic, ENT_QUOTES);
         $augmentation_prix = htmlentities($this->augmentation_prix, ENT_QUOTES);
+        $date_actuelle = mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"));
+        $expire = $this->date_fin - $date_actuelle;
+        if($expire <= 0){
+            $expire = "disabled";
+        }else{
+            $expire = "active";
+        }
 
         //Ici on determine si l'image existe ou non et en fonction on affiche le code html correspondant
         if($image_nom !== ""){
@@ -50,7 +57,7 @@ class Enchere {
                         <p class="card-text mb-4">Prix de l'enchère : {$augmentation_prix} cts/clic</p>
                         <div class="text-center">
                             <form method="POST" action=#{$id}>
-                                <input name="indice" value={$id} style="display:none;">
+                                <input name="indice" value={$id} {$expire} style="display:none;">
                                 <button class="btn btn-primary btn-listEnchere p-0" name="submit">Enchérir</button>
                             </form>
                         </div>
@@ -72,7 +79,7 @@ HTML;
                         <p class="card-text mb-4">Prix de l'enchère : {$augmentation_prix} cts/clic</p>
                         <div class="text-center">
                             <form method="POST" action=#{$id}>
-                                <input name="indice" value={$id} style="display:none;">
+                                <input name="indice" value={$id} {$expire} style="display:none;">
                                 <button class="btn btn-primary btn-listEnchere p-0" name="submit">Enchérir</button>
                             </form>
                         </div>

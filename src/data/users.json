@@ -1,0 +1,15 @@
+[
+    {
+        "id" : 1,
+        "solde" : 120,
+        "pseudo" : "nmd974",
+        "role" : "user",
+        "password": "1234"
+    },
+    {
+        "id": 2,
+        "pseudo": "admin",
+        "role" : "admin",
+        "password": "1234"
+    }
+]

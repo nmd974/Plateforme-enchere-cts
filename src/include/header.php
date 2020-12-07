@@ -1,5 +1,20 @@
 <?php 
     define('__ROOT__', dirname(dirname(__DIR__))); 
+    require_once(__ROOT__.'/src/controllers/authentification.php');
+    require_once(__ROOT__.'/src/controllers/recupererData.php');
+    
+    //On lance la session
+    session_start();
+
+    if(!isset($_SESSION['adminLogged'])){
+        $_SESSION['adminLogged'] = false;
+    }
+    if(!isset($_SESSION['userLogged'])){
+        $_SESSION['userLogged'] = false;
+    }
+    var_dump($_SESSION);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -32,26 +47,67 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top mb-5" id="mainNav">
         <div class="container-fluid">
-            <a class="navbar-brand js-scroll-trigger text-white font-weight-bold" href="#page-top" id="title-header">Ventes aux enchères</a>
+            <a class="navbar-brand js-scroll-trigger text-white font-weight-bold" href="../pages/home.php?page=1" id="title-header"><i class="fa fa-cube fa-2x" aria-hidden="true"></i></a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                <ul class="navbar-nav nav mr-auto">
 
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger text-white effect-underline font-weight-bold" href="../pages/home.php?page=1">Liste des enchères</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link js-scroll-trigger text-white effect-underline font-weight-bold dropdown-toggle" href="../pages/enchereManager.php?page=1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Enchère Manager
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../pages/enchereManager.php">Liste des enchères</a>
-                            <a class="dropdown-item" href="../pages/ajouterEnchere.php">Ajouter un produit</a>
-                        </div>
-                    </li>
+                    <!--Ici on gere l'affichage du bouton de gestion de l'admins s'il est connecte-->
+                    <?php if($_SESSION['adminLogged']):?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link js-scroll-trigger text-white effect-underline font-weight-bold dropdown-toggle" href="../pages/enchereManager.php?page=1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Enchère Manager
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="../pages/enchereManager.php">Liste des enchères</a>
+                                <a class="dropdown-item" href="../pages/ajouterEnchere.php">Ajouter un produit</a>
+                            </div>
+                        </li>
+                    <?php endif?>
                 </ul>
+                <!--Ici on gere l'affichage du bouton se connecter si personne est connecte-->
+                <?php if(!$_SESSION['adminLogged'] && !$_SESSION['userLogged']):?> 
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <div class="d-flex">
+                            <span class="text-dark effect-underline font-weight-bold">Non connecté</pspan>
+                        </div>
+                        <div>
+                            <a href="../pages/auth.php" class="text-white effect-underline font-weight-bold">
+                            <button class="btn btn-manager">Se connecter <i class="fa fa-sign-out" aria-hidden="true"></i></button></a>
+                        </div>
+                        
+                    </div>
+                <?php endif ?>
+                <?php if($_SESSION['userLogged']):?> 
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <div class="d-flex">
+                            <span class="text-dark effect-underline font-weight-bold">Votre solde :</pspan>
+                            <span class="text-dark effect-underline font-weight-bold text-center ml-2"><?= $_SESSION['solde'] ?> €</span>
+                        </div>
+                        <div>
+                            <a href="../controllers/logout.php" class="text-white effect-underline font-weight-bold">
+                            <button class="btn btn-manager">Se déconnecter <i class="fa fa-sign-in" aria-hidden="true"></i></button></a>
+                        </div>
+                        
+                    </div>
+                <?php endif ?>
+                <?php if($_SESSION['adminLogged']):?> 
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <div class="d-flex">
+                            <span class="text-dark effect-underline font-weight-bold">Mode admin active</pspan>
+                        </div>
+                        <div>
+                            <a href="../controllers/logout.php" class="text-white effect-underline font-weight-bold">
+                            <button class="btn btn-manager">Se déconnecter <i class="fa fa-sign-in" aria-hidden="true"></i></button></a>
+                        </div>
+                        
+                    </div>
+                <?php endif ?>
             </div>
         </div>
     </nav>
